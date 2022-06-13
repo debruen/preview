@@ -1,7 +1,7 @@
 {
-  "name": "p",
+  "name": "preview",
   "version": "0.0.0",
-  "description": "program",
+  "description": "preview image generation",
   "main": "index.js",
   "gypfile": true,
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/debruen/p.git"
+    "url": "git+https://github.com/debruen/preview.git"
   },
   "author": "Florian de Brün",
   "license": "",
   "bugs": {
-    "url": "https://github.com/debruen/p/issues"
+    "url": "https://github.com/debruen/preview/issues"
   },
-  "homepage": "https://github.com/debruen/p#readme",
+  "homepage": "https://github.com/debruen/preview#readme",
   "devDependencies": {
     "node-gyp": "^9.0.0"
   },

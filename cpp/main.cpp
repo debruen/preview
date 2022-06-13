@@ -4,35 +4,23 @@
 // init Program class
 Program program;
 
-// -- -- -- -- -- init
-Napi::Value program_init(const Napi::CallbackInfo& info) {
-  Napi::Function callback = info[0].As<Napi::Function>();
-
-  AsyncInit* init_synthesis = new AsyncInit(callback, program);
-  init_synthesis->Queue();
-
-  std::string msg = "init";
-  return Napi::String::New(info.Env(),msg.c_str());
-};
-
 // -- -- -- -- -- data
-Napi::Value program_data(const Napi::CallbackInfo& info) {
+Napi::Value create(const Napi::CallbackInfo& info) {
   std::string string = info[0].As<Napi::String>().Utf8Value();
   Napi::Function callback = info[1].As<Napi::Function>();
 
   nlohmann::json json = nlohmann::json::parse(string);
 
-  AsyncData* data_synthesis = new AsyncData(callback, program, json);
-  data_synthesis->Queue();
+  AsyncCreate* _create = new AsyncCreate(callback, program, json);
+  _create->Queue();
 
-  std::string msg = "program: data synthesis";
+  std::string msg = "program: preview generation";
   return Napi::String::New(info.Env(),msg.c_str());
 };
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
 
-  exports["program_init"] = Napi::Function::New(env, program_init, std::string("program_init"));
-  exports["program_data"] = Napi::Function::New(env, program_data, std::string("program_data"));
+  exports["create"] = Napi::Function::New(env, create, std::string("create"));
 
   return exports;
 }

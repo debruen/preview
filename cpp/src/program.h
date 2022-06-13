@@ -8,13 +8,10 @@ class Program {
 
   private:
 
-    nlohmann::json _data;
-
   public:
     Program();
 
-    nlohmann::json init();
-    nlohmann::json data(nlohmann::json data);
+    boolean create(nlohmann::json data);
 
 };
 

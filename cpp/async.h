@@ -9,47 +9,26 @@
 
 #include "src/program.h"
 
-// -- -- -- -- -- init
-class AsyncInit : public Napi::AsyncWorker {
-
-  private:
-    Program& program;
-    nlohmann::json m_data;
-
-  public:
-    AsyncInit(Napi::Function& callback, Program& program)
-      : AsyncWorker(callback), program(program) {
-    };
-    virtual ~AsyncInit() {};
-
-    void Execute() {
-      m_data = program.init();
-    };
-    void OnOK() {
-      std::string string = m_data.dump();
-      Callback().Call({Env().Null(), Napi::String::New(Env(), string)});
-    };
-};
-
 // -- -- -- -- -- data
-class AsyncData : public Napi::AsyncWorker {
+class AsyncCreate : public Napi::AsyncWorker {
 
   private:
-    Program& program;
-    nlohmann::json m_data;
+    Program& _program;
+    nlohmann::json _data;
+    boolean _created = false;
 
   public:
-    AsyncData(Napi::Function& callback, Program& program, nlohmann::json data)
-      : AsyncWorker(callback), program(program), m_data(data) {
+    AsyncCreate(Napi::Function& callback, Program& program, nlohmann::json data)
+      : AsyncWorker(callback), _program(program), _data(data) {
     };
-    virtual ~AsyncData() {};
+    virtual ~AsyncCreate() {};
 
     void Execute() {
-      m_data = program.data(m_data);
+      _created = _program.create(_data);
     };
+
     void OnOK() {
-      std::string string = m_data.dump();
-      Callback().Call({Env().Null(), Napi::String::New(Env(), string)});
+      Callback().Call({Env().Null(), Napi::Boolean::New(Env(), _created)});
     };
 };
 

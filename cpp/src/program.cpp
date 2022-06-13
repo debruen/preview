@@ -5,14 +5,8 @@ Program::Program() {
   _data = 0;
 }
 
+boolean Program::create(nlohmann::json data) {
 
-nlohmann::json Program::init() {
-  return _data;
-}
 
-nlohmann::json Program::data(nlohmann::json data) {
-
-  _data = data;
-
-  return _data;
+  return true;
 }
