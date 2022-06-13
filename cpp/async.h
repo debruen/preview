@@ -15,7 +15,7 @@ class AsyncCreate : public Napi::AsyncWorker {
   private:
     Program& _program;
     nlohmann::json _data;
-    boolean _created = false;
+    bool _created = false;
 
   public:
     AsyncCreate(Napi::Function& callback, Program& program, nlohmann::json data)

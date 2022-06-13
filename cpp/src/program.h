@@ -11,7 +11,7 @@ class Program {
   public:
     Program();
 
-    boolean create(nlohmann::json data);
+    bool create(nlohmann::json data);
 
 };
 
